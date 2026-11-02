@@ -28,7 +28,7 @@ jobs:
       # GitHub disables scheduled workflows after 60 days without repository activity.
       # Once a week (Mondays, first run after 00:00 UTC) commit a timestamp so the schedule stays active.
       - name: Weekly keep-active commit
-        if: always() && (github.event_name == 'workflow_dispatch' || (github.event.schedule && format('{0}', github.event.schedule) != ''))
+        if: always()
         run: |
           if [ "$(date -u +%u)" != "1" ] || [ "$(date -u +%H)" != "00" ] || [ "$(date -u +%M)" -ge 5 ]; then
             [ "${{ github.event_name }}" = "workflow_dispatch" ] || { echo "not the weekly slot"; exit 0; }
